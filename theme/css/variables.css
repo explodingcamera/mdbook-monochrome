@@ -1,0 +1,26 @@
+:root {
+	--sidebar-target-width: 216px;
+	--sidebar-width: min(var(--sidebar-target-width), 80vw);
+	--sidebar-resize-indicator-width: 0px;
+	--sidebar-resize-indicator-space: 0px;
+	--page-padding: 34px;
+	--content-max-width: 768px;
+	--menu-bar-height: 52px;
+	--mono-font:
+		"Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono",
+		monospace, monospace;
+	--code-font-size: 0.875em;
+	--searchbar-margin-block-start: 5px;
+
+	--warning-border: #ff8e00;
+	--copy-button-filter: none;
+	--copy-button-filter-hover: none;
+	--footnote-highlight: light-dark(#b9e8ee, #2b5ea5);
+	--overlay-bg: light-dark(rgb(255 255 255 / 76%), rgb(0 0 0 / 76%));
+	--blockquote-note-color: light-dark(#0969da, #4493f8);
+	--blockquote-tip-color: light-dark(#008000, #09ca09);
+	--blockquote-important-color: light-dark(#8250df, #ab7df8);
+	--blockquote-warning-color: light-dark(#9a6700, #d29922);
+	--blockquote-caution-color: light-dark(#b52731, #f21424);
+	--sidebar-header-border-color: light-dark(#087f8c, #8be9fd);
+}

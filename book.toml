@@ -1,0 +1,12 @@
+[book]
+authors = ["Henry"]
+language = "en"
+title = "mdBook Monochrome"
+description = "A clean, monochrome design for mdBook, with a new page layout, typography, and navigation."
+
+[output.html]
+sidebar-header-nav = true
+
+[output.html.fold]
+enable = false
+level = 0
