@@ -1,26 +1,69 @@
 :root {
-	--sidebar-target-width: 216px;
-	--sidebar-width: min(var(--sidebar-target-width), 80vw);
-	--sidebar-resize-indicator-width: 0px;
-	--sidebar-resize-indicator-space: 0px;
-	--page-padding: 34px;
-	--content-max-width: 768px;
-	--menu-bar-height: 52px;
+	--sidebar-width: min(216px, 80vw);
+	--content-width: 768px;
+	--right-rail-width: 210px;
+	--page-gap: 34px;
+	--layout-edge: max(32px, calc((100vw - 1320px) / 2));
+	--reading-width: min(
+		var(--content-width),
+		calc(
+			100vw -
+			2 *
+			var(--layout-edge) -
+			var(--sidebar-width) -
+			2 *
+			var(--page-gap) -
+			var(--right-rail-width)
+		)
+	);
+	--content-start: calc(
+		var(--layout-edge) +
+		var(--sidebar-width) +
+		var(--page-gap)
+	);
+	--right-rail-start: calc(
+		var(--content-start) +
+		var(--reading-width) +
+		var(--page-gap)
+	);
+	--header-height: 52px;
+	--sidebar-title-display: block;
+	--sidebar-title-space: 30px;
+	--content-title-display: none;
+	--sans-font:
+		Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+		sans-serif;
 	--mono-font:
-		"Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono",
-		monospace, monospace;
-	--code-font-size: 0.875em;
-	--searchbar-margin-block-start: 5px;
+		ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+		"DejaVu Sans Mono", monospace;
+	--color-scheme: light dark;
+	--mono-canvas: light-dark(#fff, #080808);
+	--mono-surface: light-dark(#f5f6f8, #0e0f13);
+	--mono-surface-raised: light-dark(#eceef2, #171822);
+	--mono-code-header: light-dark(#eceef1, #171717);
+	--mono-code-border: light-dark(transparent, #303030);
+	--mono-text: light-dark(#24262a, #dedede);
+	--mono-heading: light-dark(#111216, #eee);
+	--mono-title: light-dark(#30323a, #b8bac1);
+	--mono-muted: light-dark(#686b73, #a9a9a9);
+	--mono-subtle: light-dark(#858992, #777);
+	--mono-border: light-dark(#d9dce2, #303038);
+	--mono-border-strong: light-dark(#c4c8d0, #444754);
+	--mono-accent: light-dark(#087f8c, #8be9fd);
+	--mono-link: light-dark(#0969da, #72a8ff);
+	--mono-inline-code: light-dark(#edf3fa, #101925);
+	--mono-selection: light-dark(#b9e8ee, #2b5ea5);
+	--warning: #ff8e00;
+	--note: light-dark(#0969da, #4493f8);
+	--tip: light-dark(#008000, #09ca09);
+	--important: light-dark(#8250df, #ab7df8);
+	--caution: light-dark(#b52731, #f21424);
+}
 
-	--warning-border: #ff8e00;
-	--copy-button-filter: none;
-	--copy-button-filter-hover: none;
-	--footnote-highlight: light-dark(#b9e8ee, #2b5ea5);
-	--overlay-bg: light-dark(rgb(255 255 255 / 76%), rgb(0 0 0 / 76%));
-	--blockquote-note-color: light-dark(#0969da, #4493f8);
-	--blockquote-tip-color: light-dark(#008000, #09ca09);
-	--blockquote-important-color: light-dark(#8250df, #ab7df8);
-	--blockquote-warning-color: light-dark(#9a6700, #d29922);
-	--blockquote-caution-color: light-dark(#b52731, #f21424);
-	--sidebar-header-border-color: light-dark(#087f8c, #8be9fd);
+.light {
+	--color-scheme: light;
+}
+
+.dark {
+	--color-scheme: dark;
 }

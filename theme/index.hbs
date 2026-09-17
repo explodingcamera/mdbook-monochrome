@@ -10,6 +10,9 @@
         {{#if base_url}}
         <base href="{{ base_url }}">
         {{/if}}
+        {{#if canonical_url}}
+        <link rel="canonical" href="{{ canonical_url }}">
+        {{/if}}
 
 
         <!-- Custom HTML head -->
@@ -31,9 +34,6 @@
         {{#if print_enable}}
         <link rel="stylesheet" href="{{ resource "css/print.css" }}" media="print">
         {{/if}}
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="{{ resource "fonts/fonts.css" }}">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" id="mdbook-highlight-css" href="{{ resource "highlight.css" }}">
@@ -96,42 +96,53 @@
         </script>
 
         <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            {{#if book_title}}
+            <a class="sidebar-book-title" href="{{ path_to_root }}">{{ book_title }}</a>
+            {{/if}}
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="{{ path_to_root }}toc.html"></iframe>
             </noscript>
         </nav>
+        <button id="mdbook-sidebar-backdrop" type="button" aria-label="Close table of contents" tabindex="-1"></button>
 
         <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <button id="monochrome-theme-toggle" class="theme-toggle" type="button" title="Toggle color scheme" aria-label="Toggle color scheme" aria-pressed="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="theme-toggle__simple" fill="currentColor" viewBox="0 0 32 32">
-                        <clipPath id="theme-toggle__simple__cutout">
-                            <path d="M0-5h55v37h-55zm32 12a1 1 0 0025 0 1 1 0 00-25 0"></path>
-                        </clipPath>
-                        <g clip-path="url(#theme-toggle__simple__cutout)">
-                            <circle cx="16" cy="16" r="15"></circle>
-                        </g>
-                    </svg>
-                </button>
-
+                {{#if book_title}}
                 <a class="content-book-title" href="{{ path_to_root }}">{{ book_title }}</a>
+                {{/if}}
                 <div id="mdbook-menu-bar-hover-placeholder"></div>
                 <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <button id="mdbook-sidebar-toggle" class="icon-button" type="button" title="Toggle table of contents" aria-label="Toggle table of contents" aria-controls="mdbook-sidebar" aria-expanded="false">
-                            {{fa "solid" "bars"}}
+                            <span class="icon icon-panel-left" aria-hidden="true"></span>
                         </button>
-                        {{#if search_enabled}}
-                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Search this book" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-search-wrapper">
-                            {{fa "solid" "magnifying-glass"}}
-                        </button>
-                        {{/if}}
                     </div>
 
                     <h1 class="menu-title">{{ book_title }}</h1>
+
+                    <div class="right-buttons">
+                        {{#if git_repository_edit_url}}
+                        <a class="icon-button mobile-book-action" href="{{ git_repository_edit_url }}" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class="icon icon-pencil" aria-hidden="true"></span>
+                        </a>
+                        {{/if}}
+                        {{#if git_repository_url}}
+                        <a class="icon-button mobile-book-action" href="{{ git_repository_url }}" title="Repository" aria-label="Repository">
+                            <span class="icon icon-code" aria-hidden="true"></span>
+                        </a>
+                        {{/if}}
+                        {{#if search_enabled}}
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search" aria-label="Search this book" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-search-wrapper">
+                            <span class="icon icon-search" aria-hidden="true"></span>
+                        </button>
+                        {{/if}}
+                        <button id="monochrome-theme-toggle" class="icon-button theme-toggle" type="button" title="Toggle color scheme" aria-label="Toggle color scheme" aria-pressed="false">
+                            <span class="icon icon-sun" aria-hidden="true"></span>
+                        </button>
+                    </div>
 
                 </div>
 
@@ -141,7 +152,7 @@
                         <div class="search-wrapper">
                             <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-label="Search query" aria-controls="mdbook-searchresults-outer" aria-describedby="mdbook-searchresults-header">
                             <div class="spinner-wrapper">
-                                {{fa "solid" "spinner" "fa-spin"}}
+                                <span class="icon icon-loader" aria-hidden="true"></span>
                             </div>
                         </div>
                     </form>
@@ -159,13 +170,13 @@
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
+                        <!-- Chapter navigation -->
                         {{#if previous}}
                             <a rel="prev" href="{{ path_to_root }}{{previous.link}}" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 {{#if (eq ../text_direction "rtl")}}
-                                {{fa "solid" "angle-right"}}
+                                <span class="icon icon-chevron-right" aria-hidden="true"></span>
                                 {{else}}
-                                {{fa "solid" "angle-left"}}
+                                <span class="icon icon-chevron-left" aria-hidden="true"></span>
                                 {{/if}}
                             </a>
                         {{/if}}
@@ -173,25 +184,33 @@
                         {{#if next}}
                             <a rel="next prefetch" href="{{ path_to_root }}{{next.link}}" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 {{#if (eq ../text_direction "rtl")}}
-                                {{fa "solid" "angle-left"}}
+                                <span class="icon icon-chevron-left" aria-hidden="true"></span>
                                 {{else}}
-                                {{fa "solid" "angle-right"}}
+                                <span class="icon icon-chevron-right" aria-hidden="true"></span>
                                 {{/if}}
                             </a>
                         {{/if}}
 
-                        <div style="clear: both"></div>
+                        <div class="nav-actions">
+                            {{#if git_repository_edit_url}}
+                            <a class="icon-button" href="{{ git_repository_edit_url }}" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                                <span class="icon icon-pencil" aria-hidden="true"></span>
+                            </a>
+                            {{/if}}
+                            {{#if git_repository_url}}
+                            <a class="icon-button" href="{{ git_repository_url }}" title="Repository" aria-label="Repository">
+                                <span class="icon icon-code" aria-hidden="true"></span>
+                            </a>
+                            {{/if}}
+                            <button class="icon-button theme-toggle footer-theme-toggle" type="button" title="Toggle color scheme" aria-label="Toggle color scheme" aria-pressed="false">
+                                <span class="icon icon-sun" aria-hidden="true"></span>
+                            </button>
+                        </div>
                     </nav>
                 </div>
             </div>
 
         </div>
-
-        <template id=fa-eye>{{fa "solid" "eye"}}</template>
-        <template id=fa-eye-slash>{{fa "solid" "eye-slash"}}</template>
-        <template id=fa-copy>{{fa "regular" "copy"}}</template>
-        <template id=fa-play>{{fa "solid" "play"}}</template>
-        <template id=fa-clock-rotate-left>{{fa "solid" "clock-rotate-left"}}</template>
 
         {{#if live_reload_endpoint}}
         <!-- Livereload script (if served using the cli tool) -->
@@ -238,7 +257,6 @@
         <script src="{{ resource "searcher.js" }}"></script>
         {{/if}}
 
-        <script src="{{ resource "clipboard.min.js" }}"></script>
         <script src="{{ resource "highlight.js" }}"></script>
         <script src="{{ resource "book.js" }}"></script>
 

@@ -1,7 +1,8 @@
 #mdbook-sidebar,
 #mdbook-menu-bar,
+.on-this-page,
 .nav-chapters,
-.mobile-nav-chapters {
+.nav-wrapper {
 	display: none;
 }
 
@@ -17,6 +18,11 @@
 	padding: 0;
 }
 
+.content main {
+	max-width: none;
+	margin: 0;
+}
+
 .page {
 	overflow-y: initial;
 }
@@ -26,7 +32,7 @@ code {
 }
 
 pre > .buttons {
-	z-index: 2;
+	display: none;
 }
 
 a,
@@ -51,8 +57,4 @@ pre,
 code {
 	page-break-inside: avoid;
 	white-space: pre-wrap;
-}
-
-.fa {
-	display: none;
 }

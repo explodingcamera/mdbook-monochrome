@@ -4,7 +4,7 @@ A sample of the text, code, and other elements you might include in a book.
 
 ## Typography
 
-Use **bold** for emphasis, _italics_ for a term you're introducing, and `inline code` for filenames or commands. Links connect related pages, such as the [quick start](./quick-start.md).
+Use **bold** for emphasis, _italics_ for a term you're introducing, and `inline code` for filenames or commands. Links connect related pages, such as the [installation guide](./overview.md#install-the-theme).
 
 Strikethrough can mark a revision: the preview server runs on port ~~3000~~ 8000.
 
@@ -54,7 +54,7 @@ Chapter
 
 ```rust
 fn main() {
-    let chapters = ["Overview", "Quick start", "Demo"];
+    let chapters = ["Overview", "Customization", "Demo"];
 
     for chapter in chapters {
         println!("{chapter}");
@@ -67,10 +67,6 @@ fn main() {
 ```toml
 [book]
 title = "My documentation"
-
-[output.html]
-theme = "mdbook-monochrome/theme"
-sidebar-header-nav = true
 ```
 
 ### Shell
@@ -81,11 +77,11 @@ mdbook serve --open
 
 ## Table
 
-| File | Purpose |
-| --- | --- |
-| `book.toml` | Book settings and theme configuration |
-| `src/SUMMARY.md` | Chapter order and hierarchy |
-| `src/overview.md` | The opening chapter of this demo |
+| File              | Purpose                               |
+| ----------------- | ------------------------------------- |
+| `book.toml`       | Book settings and theme configuration |
+| `src/SUMMARY.md`  | Chapter order and hierarchy           |
+| `src/overview.md` | The opening chapter of this demo      |
 
 ## Keyboard input
 
