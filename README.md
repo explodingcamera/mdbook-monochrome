@@ -2,12 +2,12 @@
 
 A clean, monochrome design for mdBook, with a new page layout, typography, and navigation.
 
-[View the demo site](https://mdbook-monochrome.dawdle.space).
+[Quickstart](https://mdbook-monochrome.dawdle.space) / [Demo](https://mdbook-monochrome.dawdle.space/demo.html)
 
 <table>
   <tr>
-    <td align="center"><img src="./assets/desktop.png" alt="Desktop view" height="280"></td>
-    <td align="center"><img src="./assets/mobile.png" alt="Mobile view" height="280"></td>
+    <td align="center"><a href="https://mdbook-monochrome.dawdle.space"><img src="./assets/desktop.png" alt="Desktop view" height="280"></a></td>
+    <td align="center"><a href="https://mdbook-monochrome.dawdle.space"><img src="./assets/mobile.png" alt="Mobile view" height="280"></a></td>
   </tr>
 </table>
 
