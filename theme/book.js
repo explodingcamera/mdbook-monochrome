@@ -251,8 +251,17 @@ function setupSidebar() {
 	const button = document.getElementById("mdbook-sidebar-toggle");
 	const backdrop = document.getElementById("mdbook-sidebar-backdrop");
 	if (!sidebar || !checkbox || !button) return;
+	const desktop = window.matchMedia("(min-width: 1081px)");
 
-	function update() {
+	function desktopSidebarVisible() {
+		try {
+			return localStorage.getItem("mdbook-sidebar-desktop") !== "hidden";
+		} catch {
+			return true;
+		}
+	}
+
+	function update(persist = false) {
 		const visible = checkbox.checked;
 		document.documentElement.classList.toggle("sidebar-visible", visible);
 		sidebar.hidden = !visible;
@@ -261,9 +270,14 @@ function setupSidebar() {
 		for (const link of sidebar.querySelectorAll("a")) {
 			link.tabIndex = visible ? 0 : -1;
 		}
-		try {
-			localStorage.setItem("mdbook-sidebar", visible ? "visible" : "hidden");
-		} catch {}
+		if (persist && desktop.matches) {
+			try {
+				localStorage.setItem(
+					"mdbook-sidebar-desktop",
+					visible ? "visible" : "hidden",
+				);
+			} catch {}
+		}
 	}
 
 	button.addEventListener("click", () => {
@@ -274,12 +288,11 @@ function setupSidebar() {
 		checkbox.checked = false;
 		update();
 	});
-	checkbox.addEventListener("change", update);
+	checkbox.addEventListener("change", () => update(true));
 	update();
 
-	const desktop = window.matchMedia("(min-width: 1081px)");
 	const syncViewport = (event) => {
-		checkbox.checked = event.matches;
+		checkbox.checked = event.matches && desktopSidebarVisible();
 		update();
 	};
 	desktop.addEventListener("change", syncViewport);

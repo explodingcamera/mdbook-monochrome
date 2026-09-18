@@ -81,9 +81,9 @@
         <script>
             let sidebar = null;
             const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
-                sidebar = sidebar || 'visible';
+            if (window.matchMedia("(min-width: 1081px)").matches) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar-desktop'); } catch(e) { }
+                sidebar = sidebar === 'hidden' ? 'hidden' : 'visible';
             } else {
                 sidebar = 'hidden';
                 sidebar_toggle.checked = false;
