@@ -684,6 +684,10 @@ pre.playground > code.result {
 		display: none;
 	}
 
+	.page-wrapper {
+		min-height: 100dvh;
+	}
+
 	.content {
 		min-height: calc(100dvh - var(--header-height));
 		margin-top: var(--header-height);
